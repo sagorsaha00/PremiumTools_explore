@@ -3,8 +3,8 @@ import { MoveUpRight } from "lucide-react";
 import { products } from "../../products";
 import { useState } from "react";
 import ThemeContext from "../ThemeContext";
+import { toast } from "react-toastify";
 
-import Navbar from "./navbar";
 function ProductCard({ item, ItemAddCart }) {
   const [clicked, setClicked] = useState(false);
   return (
@@ -38,7 +38,7 @@ function ProductCard({ item, ItemAddCart }) {
           ItemAddCart(item);
           setClicked(true);
         }}
-        className={`w-full mt-6 py-2 rounded-full font-medium transition ${clicked ? "bg-green-500 text-white cursor-not-allowed" : "bg-purple-600 text-white hover:bg-purple-700"}`}
+        className={`w-full cursor-pointer mt-6 py-2 rounded-full font-medium transition ${clicked ? "bg-green-500 text-white cursor-not-allowed" : "bg-purple-600 text-white hover:bg-purple-700"}`}
         disabled={clicked}
       >
         {clicked ? "Added to Cart" : "Add to Cart"}
@@ -111,16 +111,18 @@ export default function ProductsPrimumSection() {
   const [activeTab, setActiveTab] = useState("products");
   const { cart, setCart } = useContext(ThemeContext);
   function handleAddToCart(item) {
+    toast.success("✅ Product added to cart!");
     if (cart.find((agoProduct) => agoProduct.id === item.id)) return;
     setCart((prev) => [...prev, item]);
   }
 
   function handleRemove(itemToRemove) {
+    toast.error("❌ Product removed from cart!");
     setCart((prev) => prev.filter((item) => item !== itemToRemove));
   }
   function handleClearCart() {
     setCart([]);
-    alert("Thank your For Order,its going now to checkout");
+    toast.success("Cart Clear Successfully");
   }
 
   return (
