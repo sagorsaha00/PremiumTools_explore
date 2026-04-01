@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MoveUpRight } from "lucide-react";
-import { products } from "../../products";
+// import { products } from "../../public/products.json";
 import { useState } from "react";
 import ThemeContext from "../ThemeContext";
 import { toast } from "react-toastify";
@@ -110,6 +110,16 @@ function Cart({ cart, RemoveProduct, handleClearCart }) {
 export default function ProductsPrimumSection() {
   const [activeTab, setActiveTab] = useState("products");
   const { cart, setCart } = useContext(ThemeContext);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const data = fetch("/products.json");
+    data
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("json data", data);
+        setProducts(json);
+      });
+  }, [cart]);
   function handleAddToCart(item) {
     toast.success("✅ Product added to cart!");
     if (cart.find((agoProduct) => agoProduct.id === item.id)) return;

@@ -1,6 +1,16 @@
-import { pricingData } from "../../priceData";
+import { useEffect, useState } from "react";
+// import { pricingData } from "../../public/priceData";
 
 export default function PricBox() {
+  const [pricingData, setPricingData] = useState([]);
+  useEffect(() => {
+    const data = fetch("/priceData.json");
+    data
+      .then((response) => response.json())
+      .then((json) => {
+        setPricingData(json);
+      });
+  }, []);
   return (
     <div className=" py-16 bg-gray-100 px-4 flex flex-col items-center">
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 text-center">
