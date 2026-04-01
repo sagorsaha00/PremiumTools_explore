@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import { MoveUpRight } from "lucide-react";
-// import { products } from "../../public/products.json";
 import { useState } from "react";
 import ThemeContext from "../ThemeContext";
 import { toast } from "react-toastify";
@@ -146,7 +145,7 @@ export default function ProductsPrimumSection() {
           <div className="flex justify-center mt-6 gap-4">
             <button
               onClick={() => setActiveTab("products")}
-              className={`px-6 py-2 rounded-full transition ${
+              className={`px-6 py-2 cursor-pointer rounded-full transition ${
                 activeTab === "products"
                   ? "bg-purple-600 text-white"
                   : "bg-gray-300 text-gray-700"
@@ -157,7 +156,7 @@ export default function ProductsPrimumSection() {
 
             <button
               onClick={() => setActiveTab("cart")}
-              className={`px-6 py-2 rounded-full transition ${
+              className={`px-6 cursor-pointer py-2 rounded-full transition ${
                 activeTab === "cart"
                   ? "bg-purple-600 text-white"
                   : "bg-white border text-gray-600"
